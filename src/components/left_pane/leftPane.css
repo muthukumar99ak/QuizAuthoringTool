@@ -1,0 +1,89 @@
+
+/* Left pane */
+
+.leftPaneCont{
+    position: sticky;
+    top: 0;
+}
+
+.leftPane{
+    padding: 20px 30px 0;
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    position: relative;
+}
+
+.leftPane::-webkit-scrollbar{
+    width: 5px;
+}
+
+/* Track */
+.leftPane::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+/* Handle */
+.leftPane::-webkit-scrollbar-thumb {
+    background: rgb(167, 167, 167); 
+    border-radius: 10px;
+}
+  
+/* Handle on hover */
+.leftPane::-webkit-scrollbar-thumb:hover {
+    background: rgb(129, 129, 129); 
+}
+
+.questionList{
+    list-style: none;
+    margin: 0;
+}
+
+.questionList .active .questionText{
+    font-weight: 700;
+}
+
+.questionList li{
+    display: flex;
+}
+
+input.delCheckbox{
+    transform: scale(1.4);
+    margin: 22px 16px 0 5px;
+    display: none;
+}
+
+.questionList.showDelete .delCheckbox{
+    display: inline-block;
+}
+
+.questionText{
+    font-size: 19px;
+    outline: none !important;
+    padding: 16px 0;
+    font-weight: 500;
+    background-color: transparent !important;
+    box-shadow: none;
+    font-family: 'Open Sans', sans-serif;
+    border: 0 !important;
+    text-align: left;
+    line-break: anywhere;
+    line-height: 24px;
+    width: 100%;
+} 
+
+.leftPaneFooter{
+    position: sticky;
+    bottom: 0;
+    box-sizing: border-box;
+    left: 0;
+    width: 100%;
+    padding: 10px 10px;
+    background: #fff;
+    z-index: 9;
+}
+
+.leftPaneBody{
+    padding: 10px 0 20px;
+}

@@ -1,0 +1,88 @@
+
+
+@media (max-width: 992px) {
+    div.leftPaneCont{
+        width: 100% !important;
+    }
+    div.rightPaneCont{
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        right: -150%;
+        width: 100% !important;
+        transition: all linear .2s;
+    }
+    div.rightPaneCont.show{
+        right: 0;
+        background: white;
+        padding-left: 30px;
+        overflow-y: auto;
+    }
+    .closePane{
+        display: inline-block;
+    }
+    .textBoxCont{
+        position: relative;
+    }
+    .delOption{
+        position: absolute;
+        top: -3px;
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        right: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    div.rightPaneCont.show{
+        padding-left: 15px;
+    }
+    .rightPane{
+        padding-right: 15px;
+        padding-top: 0;
+    }
+    .rightPaneBody{
+        padding-top: 0;
+    }
+    .leftPane{
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-top: 0;
+    }
+    .leftPaneBody{
+        padding-top: 0;
+    }
+    .textBoxCont{
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .textBoxCont label{
+        width: 100%;
+        font-size: 16px;
+    }
+    .textBox, .questionText{
+        font-size: 16px;
+    }
+    .questionText{
+        padding: 8px 0;
+    }
+    .bton{
+        font-size: 13px !important;
+        padding: 7px 10px !important;
+    }
+    input.delCheckbox{
+        margin: 14px 16px 0 5px;
+    }
+    .paneHeader{
+        position: sticky;
+        top: 0;
+        background: #fff;
+        padding: 10px 0 5px;
+        margin-bottom: 10px;
+        z-index: 99;
+    }
+}

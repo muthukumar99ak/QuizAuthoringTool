@@ -1,0 +1,82 @@
+/* Right pane */
+
+.rightPane{
+    padding: 20px 30px 20px 0;
+    position: relative;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.rightPaneBody{
+    padding: 20px 0;
+}
+
+.textBoxCont{
+    display: flex;
+    align-items: flex-start;
+}
+
+.textBoxCont label{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 5px 0;
+    font-family: 'Open Sans', sans-serif;
+    margin-right: 20px;
+    min-width: 150px;
+    width: 150px;
+}
+
+.optionsCont{
+    padding: 20px 0;
+}
+
+.rightPane .question_alt{
+    font-size: 30px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    bottom: 0;
+    box-sizing: border-box;
+    top: 0;
+}
+
+.delOption{
+    color: #ff7575;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    display: inline-block;
+    border: 2px solid #ff7575;
+    right: -26px;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.delOption{
+    position: unset;
+    border-radius: 30px;
+    padding: 0 5px;
+    margin: 8px 0px 0px 10px;
+}
+
+
+.closePane{
+    background-color: transparent;
+    border: 1.3px solid #ff6262 !important;
+    outline: none !important;
+    font-size: 20px;
+    padding: 1px 5px;
+    float: right;
+    border-radius: 30px;
+    color: #ff7272;
+    margin-top: 7px;
+    display: none;
+}
+
+.optionAreaCont textarea{
+    padding-right: 40px;
+}

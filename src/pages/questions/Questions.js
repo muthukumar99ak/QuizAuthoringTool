@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import LeftPane from '../left_pane/LeftPane';
-import RightPane from '../right_pane/RightPane';
+import LeftPane from '../../components/left_pane/LeftPane';
+import RightPane from '../../components/right_pane/RightPane';
 import './questionResponsive.css'
 
 function Questions() {

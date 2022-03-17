@@ -1,5 +1,6 @@
 function QuestionTitle(props) {
-    const isChecked = props.willBeDeleteQuestion.find(deleteQuestionId => deleteQuestionId === props.question.id)
+    let isQuestionInDeleteQuestion = props.willBeDeleteQuestion.find(deleteQuestionId => deleteQuestionId === props.question.id);
+    let isChecked = isQuestionInDeleteQuestion ? isQuestionInDeleteQuestion : false;
 
     return <li className={props.questionToShow === props.questionIndex ? 'active' : ''}>
         <input

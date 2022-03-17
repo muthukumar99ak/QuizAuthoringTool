@@ -34,6 +34,7 @@ function QuestionOptions(props) {
             <YellowButton
                 onClick={() => props.addOptionHandler(props.question.id, setShowDeleteOption)}
                 label='ADD'
+                disabled={((props.question.options.length > 2) && showDeleteOption) ? true : false}
             />
             {(props.question.options.length > 2) &&
                 <RedButton

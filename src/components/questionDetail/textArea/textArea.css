@@ -1,5 +1,5 @@
 
-.textBox{
+.textbox{
     border: 1.3px solid #ededed;
     box-shadow: none;
     width: 100%;
@@ -12,16 +12,16 @@
     font-weight: 500;
     line-height: 24px;
     color: #333;
-    box-shadow: none !important;
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
-.textBox::-webkit-scrollbar{
+.textbox::-webkit-scrollbar{
     display: none;
 }
 
-.textBox:focus{
+.textbox:focus{
     border-color: #29376d;
+    box-shadow: none;
 }

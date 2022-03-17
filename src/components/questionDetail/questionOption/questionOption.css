@@ -1,10 +1,10 @@
 
-.optionAreaCont{
+.option_area_container{
     width: 100%;
     position: relative;
 }
 
-.checkCrct{
+.check_correct{
     position: absolute;
     right: 9px;
     top: 9px;
@@ -20,7 +20,7 @@
     cursor: pointer;
 }
 
-.checkCrct.active{
+.check_correct.active{
     background: green;
     color: #fff;
 }

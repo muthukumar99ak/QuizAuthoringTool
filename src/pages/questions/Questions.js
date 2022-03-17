@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import LeftPane from '../../components/left_pane/LeftPane';
-import RightPane from '../../components/right_pane/RightPane';
-import './questionResponsive.css'
+import React, { useEffect, useState } from 'react';
+import QuestionList from '../../components/questionList/QuestionList';
+import QuestionDetail from '../../components/questionDetail/QuestionDetail';
+import './questionResponsive.css';
+
+let retrievedQuestions = localStorage.getItem('questions');
 
 function Questions() {
-    let retrievedQuestions = localStorage.getItem('questions');
     const [questions, setQuestions] = useState(() => retrievedQuestions ? JSON.parse(retrievedQuestions) : []);
     const [deleteQuestion, setDeleteQuestion] = useState(false)
-    const [willBeDeleteQues, setWillBeDeleteQues] = useState([])
-    const [rightPaneShowMobile, setRightPaneShowMobile] = useState(false)
-    const [quesToShow, setQuesToShow] = useState(0)
+    const [willBeDeleteQuestion, setWillBeDeleteQuestion] = useState([])
+    const [questionDetailShowMobile, setQuestionDetailShowMobile] = useState(false)
+    const [questionToShow, setQuestionToShow] = useState(0);
+
+    useEffect(() => {
+        saveToLocalStorageHandler();
+    }, [questions])
 
     // Add question
     const addQuestionHandler = () => {
@@ -17,9 +22,8 @@ function Questions() {
         setQuestions(prev => {
             return [...prev, {
                 id: Date.now(),
-                question_text: `New question ${questionsLength}`,
-                image_url: '',
-                // crctAnswer: null,
+                questionText: `New question ${questionsLength}`,
+                imageUrl: '',
                 options: [
                     { value: '', isCorrect: false },
                     { value: '', isCorrect: false }
@@ -31,64 +35,71 @@ function Questions() {
     // Delete question
     const deleteQuestionHandler = () => {
         if (deleteQuestion === true) {
-            let copyQuestions = [...questions];
-            let copyWillBeDelQues = [...willBeDeleteQues]
-            // Deleted questions
-            copyWillBeDelQues.forEach(delQuesId => {
-                copyQuestions = copyQuestions.filter((copiedQues, copiedQuesIndex) => {
-                    if (quesToShow === copiedQuesIndex) {
-                        setQuesToShow(0)
-                    }
-                    return copiedQues.id !== delQuesId
-                })
-            });
-            setQuestions(copyQuestions)
+            if (willBeDeleteQuestion.length > 0) {
+                let deleteConfirmation = window.confirm('Are you sure want to delete?');
+                if (deleteConfirmation) {
+                    let copyQuestions = [...questions];
+                    willBeDeleteQuestion.forEach(deleteQuestionId => {
+                        copyQuestions = copyQuestions.filter((copiedQuestion, copiedQuestionIndex) => {
+                            if (questionToShow === copiedQuestionIndex) {
+                                setQuestionToShow(0)
+                            }
+                            return copiedQuestion.id !== deleteQuestionId
+                        })
+                    });
+                    setQuestions(copyQuestions)
+                    setWillBeDeleteQuestion([])
+                } else {
+                    setWillBeDeleteQuestion([])
+                }
+            }
         }
         setDeleteQuestion(prev => !prev)
     }
 
     // Change which question is to show
     const activeQuestionHandler = (questionIndex) => {
-        setQuesToShow(questionIndex)
-        setRightPaneShowMobile(true)
+        setQuestionToShow(questionIndex)
+        setQuestionDetailShowMobile(true)
     }
 
     // Question title change handler
     const questionChangeHandler = (e, questionId) => {
         let copyQuestions = [...questions];
-        copyQuestions.forEach(copiedQues => {
-            if (copiedQues.id === questionId) {
-                copiedQues.question_text = e.target.value;
+        copyQuestions.forEach(copiedQuestion => {
+            if (copiedQuestion.id === questionId) {
+                copiedQuestion.questionText = e.target.value;
             }
         })
         setQuestions(copyQuestions)
     }
 
     // Add option
-    const addOptionHandler = (questionId) => {
+    const addOptionHandler = (questionId, setShowDeleteOption) => {
         let copyQuestions = [...questions];
-        copyQuestions.forEach(copiedQues => {
-            if (copiedQues.id === questionId) {
-                if (copiedQues.options.length < 6) {
-                    copiedQues.options.push({ value: '', isCorrect: false });
+        copyQuestions.forEach(copiedQuestion => {
+            if (copiedQuestion.id === questionId) {
+                if (copiedQuestion.options.length < 6) {
+                    copiedQuestion.options.push({ value: '', isCorrect: false });
                 } else {
                     alert('Maximum 6 options only allowed')
                 }
             }
         })
         setQuestions(copyQuestions)
+        setShowDeleteOption(false)
     }
 
     // Check correct option
     const checkCorrectAnswer = (questionId, optionIndex) => {
         let copyQuestions = [...questions];
-        copyQuestions.forEach(copiedQues => {
-            if (copiedQues.id === questionId) {
-                copiedQues.options.forEach((option, optIndex) => {
-                    if (optIndex === optionIndex) {
-                        copiedQues.options[optIndex].isCorrect = true;
+        copyQuestions.forEach(copiedQuestion => {
+            if (copiedQuestion.id === questionId) {
+                copiedQuestion.options.forEach((copiedOption, copiedOptionIndex) => {
+                    if (copiedOptionIndex === optionIndex) {
+                        copiedQuestion.options[copiedOptionIndex].isCorrect = true;
                     } else {
-                        copiedQues.options[optIndex].isCorrect = false;
+                        copiedQuestion.options[copiedOptionIndex].isCorrect = false;
                     }
                 })
             }
@@ -97,35 +108,29 @@ function Questions() {
     }
 
     // Delete Option 
-    const delOptionHandler = (questionId, optIndex) => {
-        let copyQuestion = [...questions];
-        copyQuestion.forEach(copiedQues => {
-            if (copiedQues.id === questionId) {
-                if (copiedQues.options.length > 2) {
-                    copiedQues.options.forEach((copiedOption, copiedOptIndex) => {
-                        if (copiedOptIndex === optIndex) {
-                            copiedQues.options.splice(optIndex, 1)
+    const deleteOptionHandler = (questionId, optionIndex) => {
+        let deleteConfirmation = window.confirm('Are you sure want to delete this option?');
+        if (deleteConfirmation) {
+            let copyQuestion = [...questions];
+            copyQuestion.forEach(copiedQuestion => {
+                if (copiedQuestion.id === questionId) {
+                    copiedQuestion.options.forEach((copiedOption, copiedOptionIndex) => {
+                        if (copiedOptionIndex === optionIndex) {
+                            copiedQuestion.options.splice(optionIndex, 1)
                         }
                     })
-                } else {
-                    alert("Minimum 2 options needed")
                 }
-            }
-        })
-        setQuestions(copyQuestion)
+            })
+            setQuestions(copyQuestion)
+        }
     }
 
     // Option text change
-    const optionChangeHandler = (e, optIndex, quesId) => {
+    const optionTextChangeHandler = (e, optionIndex, questionId) => {
         let copyQuestions = [...questions];
-        copyQuestions.forEach(copiedQues => {
-            if (copiedQues.id === quesId) {
-                // Update crct answer value if its checked
-                // if (copiedQues.options[optIndex] === copiedQues.crctAnswer) {
-                //     copiedQues.crctAnswer = e.target.value
-                // }
-                copiedQues.options[optIndex].value = e.target.value;
-
+        copyQuestions.forEach(copiedQuestion => {
+            if (copiedQuestion.id === questionId) {
+                copiedQuestion.options[optionIndex].value = e.target.value;
             }
         })
         setQuestions(copyQuestions)
@@ -134,25 +139,23 @@ function Questions() {
     // Delete checkbox change handler
     const checkboxChangeHandler = (e, questionId) => {
         if (e.target.checked) {
-            setWillBeDeleteQues(prev => {
+            setWillBeDeleteQuestion(prev => {
                 return [...prev, questionId]
             })
         } else {
-            let copyWillBeDelQues = [...willBeDeleteQues];
-            let filteredWillBeDelQues = copyWillBeDelQues.filter(delQuesId => questionId !== delQuesId);
-            setWillBeDeleteQues(filteredWillBeDelQues)
+            let filteredWillBeDeleteQuestion = willBeDeleteQuestion.filter(deleteQuestionId => questionId !== deleteQuestionId);
+            setWillBeDeleteQuestion(filteredWillBeDeleteQuestion)
         }
     }
 
     // Image change handler
     const imageChangeHandler = (e, questionId) => {
-        // let file_url = URL.createObjectURL(e.target.files[0]);
         let copyQuestions = [...questions];
         var reader = new FileReader();
-        reader.onload = function (ev) {
-            copyQuestions.forEach(copiedQues => {
-                if (copiedQues.id === questionId) {
-                    copiedQues.image_url = ev.target.result;
+        reader.onload = function (readerEvent) {
+            copyQuestions.forEach(copiedQuestion => {
+                if (copiedQuestion.id === questionId) {
+                    copiedQuestion.imageUrl = readerEvent.target.result;
                 }
             })
             setQuestions(copyQuestions)
@@ -161,51 +164,55 @@ function Questions() {
     }
 
     // Delete Image
-    const delImageHandler = (questionId) => {
-        let copyQuestion = [...questions];
-        copyQuestion.forEach(copiedQues => {
-            if (copiedQues.id === questionId) {
-                copiedQues.image_url = ''
-            }
-        })
-        setQuestions(copyQuestion)
+    const deleteImageHandler = (questionId) => {
+        let deleteConfirmation = window.confirm('Are you sure want to delete the image?');
+        if (deleteConfirmation) {
+            let copyQuestion = [...questions];
+            copyQuestion.forEach(copiedQuestion => {
+                if (copiedQuestion.id === questionId) {
+                    copiedQuestion.imageUrl = ''
+                }
+            })
+            setQuestions(copyQuestion)
+        }
     }
 
     // Save to local storage
-    const saveToLocalStoHandler = () => {
+    const saveToLocalStorageHandler = () => {
         localStorage.setItem('questions', JSON.stringify(questions));
     }
 
-    saveToLocalStoHandler()
+
 
     return (
         <div className="row-fluid">
-            {/* Left Pane */}
-            <div className='span4 leftPaneCont'>
-                <LeftPane
+            {/* Question List */}
+            <div className='span4 question_list_container'>
+                <QuestionList
                     questions={questions}
                     checkboxChangeHandler={checkboxChangeHandler}
                     activeQuestionHandler={activeQuestionHandler}
                     addQuestionHandler={addQuestionHandler}
                     deleteQuestionHandler={deleteQuestionHandler}
                     deleteQuestion={deleteQuestion}
-                    quesToShow={quesToShow}
+                    questionToShow={questionToShow}
+                    willBeDeleteQuestion={willBeDeleteQuestion}
                 />
             </div>
 
-            {/* Right Pane */}
-            <div className={`span8 rightPaneCont ${rightPaneShowMobile ? 'show' : ''}`}>
-                <RightPane
+            {/* Question Detail */}
+            <div className={`span8 question_detail_container ${questionDetailShowMobile ? 'show' : ''}`}>
+                <QuestionDetail
                     questions={questions}
-                    setRightPaneShowMobile={setRightPaneShowMobile}
+                    setQuestionDetailShowMobile={setQuestionDetailShowMobile}
                     questionChangeHandler={questionChangeHandler}
-                    delImageHandler={delImageHandler}
+                    deleteImageHandler={deleteImageHandler}
                     imageChangeHandler={imageChangeHandler}
-                    optionChangeHandler={optionChangeHandler}
-                    delOptionHandler={delOptionHandler}
+                    optionTextChangeHandler={optionTextChangeHandler}
+                    deleteOptionHandler={deleteOptionHandler}
                     addOptionHandler={addOptionHandler}
                     checkCorrectAnswer={checkCorrectAnswer}
-                    quesToShow={quesToShow}
+                    questionToShow={questionToShow}
                 />
             </div>
         </div>

@@ -1,4 +1,4 @@
-.errorDetailCont{
+.error_detail_container{
     position: fixed;
     top: 0;
     bottom: 0;
@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-.errorDetailCont h2{
+.error_detail_container h2{
     font-size: 30px;
     text-align: center;
     font-family: 'Open Sans', sans-serif;

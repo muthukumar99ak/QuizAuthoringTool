@@ -1,22 +1,22 @@
 /* Right pane */
 
-.rightPane{
+.question_detail{
     padding: 20px 30px 20px 0;
     position: relative;
     box-sizing: border-box;
     min-height: 100vh;
 }
 
-.rightPaneBody{
+.question_detail_body{
     padding: 20px 0;
 }
 
-.textBoxCont{
+.inputbox_container{
     display: flex;
     align-items: flex-start;
 }
 
-.textBoxCont label{
+.inputbox_label{
     font-size: 18px;
     font-weight: 600;
     padding: 5px 0;
@@ -26,11 +26,11 @@
     width: 150px;
 }
 
-.optionsCont{
+.options_container{
     padding: 20px 0;
 }
 
-.rightPane .question_alt{
+.question_detail .question_alt{
     font-size: 30px;
     position: absolute;
     display: flex;
@@ -42,7 +42,7 @@
     top: 0;
 }
 
-.delOption{
+.delete_option{
     color: #ff7575;
     font-size: 20px;
     position: absolute;
@@ -56,7 +56,7 @@
     border-radius: 5px;
 }
 
-.delOption{
+.delete_option{
     position: unset;
     border-radius: 30px;
     padding: 0 5px;
@@ -64,9 +64,9 @@
 }
 
 
-.closePane{
+.close_question_detail{
     background-color: transparent;
-    border: 1.3px solid #ff6262 !important;
+    border: 1.3px solid #ff6262;
     outline: none !important;
     font-size: 20px;
     padding: 1px 5px;
@@ -77,6 +77,6 @@
     display: none;
 }
 
-.optionAreaCont textarea{
+.option_area_container textarea{
     padding-right: 40px;
 }

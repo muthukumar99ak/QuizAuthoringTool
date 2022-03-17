@@ -4,15 +4,15 @@ body, *{
     font-family: 'Open Sans', sans-serif;
 }
 
-.w-100{
+.w_100{
     width: 100%;
 }
 
-.d-none{
+.display_none{
     display: none;
 }
 
-.paneTitle{
+.pane_title{
     font-size: 20px;
     font-weight: 700;
     margin-top: 0;
@@ -24,34 +24,7 @@ body, *{
     text-align: center;
 }
 
-.bton{
-    box-shadow: 0 0 9px rgb(0 0 0 / 10%);
-    outline: none !important;
-    padding: 9px 10px !important;
-    min-width: 120px;
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px !important;
-    letter-spacing: .5px;
-    font-weight: 700 !important;
-    border-radius: 5px;
-    transition: all linear .2s;
-    color: #fff;
-    margin: 10px;
-    text-align: center;
-}
-
-.yellowBtn{
-    background: #fabe2c;
-    border: 2px solid #fabe2c;
-}
-
-.yellowBtn:hover{
-    background: #fff;
-    color: #ffb700;
-}
-
-.flexCenter{
+.flex_center{
     display: flex;
     align-items: center;
     justify-content: center;

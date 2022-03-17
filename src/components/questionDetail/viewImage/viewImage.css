@@ -1,5 +1,5 @@
 
-.imageCont{
+.image_container{
     width: 200px;
     height: 200px;
     border-radius: 4px;
@@ -9,7 +9,7 @@
     position: relative;
 }
 
-.delImage{
+.delete_image{
     color: #ff7575;
     font-size: 20px;
     position: absolute;
@@ -23,7 +23,7 @@
     border-radius: 5px;
 }
 
-.imageCont img{
+.image_container img{
     border-radius: 4px;
     object-fit: cover;
     object-position: center;

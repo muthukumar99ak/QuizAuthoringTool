@@ -1,30 +1,31 @@
 
 
 @media (max-width: 992px) {
-    div.leftPaneCont{
+    div.question_list_container{
         width: 100% !important;
     }
-    div.rightPaneCont{
+    div.question_detail_container.span8{
         position: fixed;
         top: 0;
         height: 100vh;
         right: -150%;
-        width: 100% !important;
+        width: 100%;
         transition: all linear .2s;
+        z-index: 99;
     }
-    div.rightPaneCont.show{
+    div.question_detail_container.show{
         right: 0;
         background: white;
         padding-left: 30px;
         overflow-y: auto;
     }
-    .closePane{
+    .close_question_detail{
         display: inline-block;
     }
-    .textBoxCont{
+    .inputbox_container{
         position: relative;
     }
-    .delOption{
+    .delete_option{
         position: absolute;
         top: -3px;
         width: 20px;
@@ -38,46 +39,42 @@
 }
 
 @media (max-width: 576px) {
-    div.rightPaneCont.show{
+    div.question_detail_container.show{
         padding-left: 15px;
     }
-    .rightPane{
+    .question_detail{
         padding-right: 15px;
         padding-top: 0;
     }
-    .rightPaneBody{
+    .question_detail_body{
         padding-top: 0;
     }
-    .leftPane{
+    .question_list{
         padding-right: 15px;
         padding-left: 15px;
         padding-top: 0;
     }
-    .leftPaneBody{
+    .question_list_body{
         padding-top: 0;
     }
-    .textBoxCont{
+    .inputbox_container{
         flex-wrap: wrap;
         margin-bottom: 10px;
     }
-    .textBoxCont label{
+    .inputbox_label{
         width: 100%;
         font-size: 16px;
     }
-    .textBox, .questionText{
+    .textBox, .question_text{
         font-size: 16px;
     }
-    .questionText{
+    .question_text{
         padding: 8px 0;
     }
-    .bton{
-        font-size: 13px !important;
-        padding: 7px 10px !important;
-    }
-    input.delCheckbox{
+    input.delete_checkbox{
         margin: 14px 16px 0 5px;
     }
-    .paneHeader{
+    .pane_header{
         position: sticky;
         top: 0;
         background: #fff;

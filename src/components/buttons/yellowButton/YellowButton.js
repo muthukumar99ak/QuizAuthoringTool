@@ -1,9 +1,10 @@
-import classes from './YellowButton.module.css'
+import '../../buttons/button.css';
 
 function YellowButton(props) {
     return <button
-        className={classes.yellowBtn}
+        className="button yellow_button"
         onClick={props.onClick}
+        disabled={props.disabled}
     >{props.label}</button>
 }
 

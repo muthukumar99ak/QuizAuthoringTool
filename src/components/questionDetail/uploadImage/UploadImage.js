@@ -1,13 +1,13 @@
 function UploadImage(props) {
-    return <div className='flexCenter'>
+    return <div className='flex_center'>
         <input
             type='file'
             id='image'
             accept="image/png, image/gif, image/jpeg, image/jpg"
-            className='d-none'
+            className='display_none'
             onChange={(e) => props.imageChangeHandler(e, props.question.id)}
         />
-        <label htmlFor='image' className='bton yellowBtn'>ADD IMAGE</label>
+        <label htmlFor='image' className='button yellow_button'>ADD IMAGE</label>
     </div>
 }
 

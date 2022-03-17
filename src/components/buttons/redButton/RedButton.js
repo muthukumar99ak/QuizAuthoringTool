@@ -1,8 +1,8 @@
-import classes from './RedButton.module.css'
+import '../../buttons/button.css';
 
 function RedButton(props) {
     return <button
-        className={classes.redBtn}
+        className="button red_button"
         onClick={props.onClick}
     >{props.label}</button>
 }

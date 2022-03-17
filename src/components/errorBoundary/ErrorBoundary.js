@@ -17,7 +17,7 @@ class ErrorBoundary extends React.Component {
     render() {
         if (this.state.errorInfo) {
             return (
-                <div className="errorDetailCont">
+                <div className="error_detail_container">
                     <h2>Something went wrong</h2>
                 </div>
             );
